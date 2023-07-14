@@ -1,3 +1,4 @@
 x = "hello"
 y = "hi"
 print(x + " " + y)
+input("")
