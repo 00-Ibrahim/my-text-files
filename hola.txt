@@ -1,4 +1,4 @@
-x = "hello"
-y = "hi"
+x = "Hello"
+y = "Sadique"
 print(x + " " + y)
 input("")
