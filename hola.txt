@@ -1,4 +1,2 @@
-x = "Hello"
-y = "Sadique"
-print(x + " " + y)
-input("")
+x = input("Enter your name: ")
+print("Hello " + x + ", How are you doing?")
