@@ -1,3 +1,2 @@
-x = input("Enter your name: ")
-print("Hello " + x + ", How are you doing?")
+print("this it just the test run and nothing else.")
 input("")
