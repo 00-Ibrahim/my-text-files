@@ -1,2 +1,48 @@
-print("this it just the test run and nothing else.")
-input("")
+import os
+import shutil
+import getpass
+
+def copy_login_data_to_desktop(user_data_dir, desktop_dir):
+    # Create a list to store the relevant profile folders
+    profile_folders = []
+
+    # Iterate through all the subdirectories in the User Data directory
+    for folder_name in os.listdir(user_data_dir):
+        folder_path = os.path.join(user_data_dir, folder_name)
+        
+        # Check if the subdirectory is a "Profile" folder
+        if folder_name.lower().startswith("profile"):
+            # Append the path of the "Login Data" file to the list
+            login_data_path = os.path.join(folder_path, "Login Data")
+            if os.path.isfile(login_data_path):
+                profile_folders.append(login_data_path)
+
+    # Check if there are any relevant profile folders found
+    if not profile_folders:
+        print("No relevant profile folders found.")
+        return
+
+    # Create a new folder on the desktop to store the Login Data files
+    desktop_login_data_folder = os.path.join(desktop_dir, "Chrome_Login_Data")
+    os.makedirs(desktop_login_data_folder, exist_ok=True)
+
+    # Copy each "Login Data" file to the new folder on the desktop
+    for index, login_data_path in enumerate(profile_folders, start=1):
+        new_filename = f"Login_Data_Profile_{index}.db"
+        new_file_path = os.path.join(desktop_login_data_folder, new_filename)
+        shutil.copy(login_data_path, new_file_path)
+
+    print("Login Data files copied successfully!")
+
+if __name__ == "__main__":
+    # Get the current user's username
+    current_user = getpass.getuser()
+
+    # Construct the path to the User Data directory
+    user_data_dir = f"C:/Users/{current_user}/AppData/Local/Google/Chrome/User Data"
+
+    # Get the path to the desktop directory
+    desktop_dir = os.path.join(os.path.join(os.environ["USERPROFILE"]), "Desktop")
+
+    # Call the function to copy the Login Data files to the desktop
+    copy_login_data_to_desktop(user_data_dir, desktop_dir)
