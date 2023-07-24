@@ -1,1 +1,16 @@
 
+
+
+
+print("Hello, welcome to the future!")
+
+x = input("Please enter your good name: ")
+
+x = x.upper()
+
+if x == "USMAN":
+    print(x, "is selected to enter the future.")
+else:
+    print(x, "is rejected to enter the future.")
+
+input("Hit enter to proceed")
