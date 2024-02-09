@@ -1,1 +1,24 @@
+import subprocess
+import platform
+import uuid
 
+def get_mac_address():
+    # Get the MAC address of the system
+    mac_address = ':'.join(['{:02x}'.format((uuid.getnode() >> elements) & 0xff) for elements in range(5, -1, -1)])
+    return mac_address.upper()
+
+def open_application(mac_address):
+    # Check if the MAC address matches
+    if get_mac_address() == mac_address:
+        subprocess.Popen(['notepad.exe'])
+        print("Notepad opened successfully.")
+    else:
+        subprocess.Popen(['cmd.exe'])
+        print("CMD opened successfully.")
+
+if __name__ == "__main__":
+    # Set the desired MAC address
+    desired_mac_address = "34-17-EB-9B-1B-AA"
+
+    # Open the appropriate application based on MAC address
+    open_application(desired_mac_address)
