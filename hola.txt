@@ -1,1 +1,11 @@
-Print("Hello")
+import subprocess
+
+def open_notepad():
+    try:
+        subprocess.Popen(['notepad.exe'])
+        print("Notepad opened successfully.")
+    except Exception as e:
+        print(f"Error: {e}")
+
+if __name__ == "__main__":
+    open_notepad()
