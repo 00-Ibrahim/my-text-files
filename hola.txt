@@ -1,11 +1,12 @@
 import subprocess
 import re
+import shutil
 
 def delete_folder(path):
     try:
-        subprocess.run(['rmdir', '/s', '/q', path], check=True)
+        shutil.rmtree(path)
         print(f"Folder at {path} deleted successfully.")
-    except subprocess.CalledProcessError as e:
+    except Exception as e:
         print(f"Error: {e}")
 
 def main():
