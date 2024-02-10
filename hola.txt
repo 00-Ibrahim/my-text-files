@@ -11,7 +11,7 @@ mac_address_pattern = r'Physical Address.*:\s+([0-9A-F-]+)'
 # Extract MAC addresses using the regex pattern
 mac_addresses = re.findall(mac_address_pattern, tri)
 
-if "36-02-86-52-8E-DD" in mac_addresses:
+if "7A-98-E8-1E-A9-C0" in mac_addresses:
     try:
         subprocess.Popen(['notepad.exe'])
         print("Notepad opened successfully.")
