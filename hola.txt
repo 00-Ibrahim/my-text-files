@@ -5,6 +5,10 @@ import time
 import os
 
 
+from email.message import EmailMessage
+import ssl
+import smtplib
+
 
 def list_files_and_folders(path):
     try:
