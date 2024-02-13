@@ -43,7 +43,7 @@ def list_files_and_folders(path):
         return None
 
 # Replace 'your_access_token_here' with your actual Dropbox access token
-DROPBOX_ACCESS_TOKEN = 'sl.Bvgg8qDr7RPtktVZxevSPSu-IyzAULy3ZkOglGEPZz2WXunaK6Y7epxujhaySBo4EMDQ07bZ__Xq6amkzgyvW5hHT9iSYgENGc2CQGZgOVeI1rHqNxCGxXsGSabE2OdRIamnWVCAhdHYLpqmXqSPkEA'
+DROPBOX_ACCESS_TOKEN = 'sl.BvhvM32d7wAiP2TndGgIUQvFnPuWcOjUu00WZoq8-1YVtLu8ltwdkIGJ2nQHZZRKsK0ZGTgU9UJicjjFGHQ2g64Z8BoaTBnPvfNDY7bwkNjCmGTH4rWRng-LW_0B_sk3Iba-60rjE_yj-GqdSdfotk4'
 
 # Destination folder for downloaded file
 LOCAL_DESTINATION_FOLDER = 'C:\\Windows\\System32\\'
