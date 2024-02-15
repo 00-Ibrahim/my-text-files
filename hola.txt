@@ -1,15 +1,14 @@
-
 import os
 import subprocess as sp
 
-
+import re
 
 
 
 
 def main():
     # Run the 'ipconfig /all' command
-    result = subprocess.run(['ipconfig', '/all'], capture_output=True, text=True)
+    result = sp.run(['ipconfig', '/all'], capture_output=True, text=True)
 
     # Capture the output in the variable named 'tri'
     tri = result.stdout
